@@ -94,23 +94,24 @@ Fill name and select "Standard" for the type.
 
 Leave other values as default.
 
-11. Click on "Create topic"
-12. Create SNS subscription
+11. Click on "Create topic" button to create the topic
+12. Select created topic from the list and open it
+13. Create SNS subscription
 
 ![](images/sns_2.png)
 ![](images/sns_3.png)
 
-13. Confirm email subscription in your mailbox
+14. Confirm email subscription in your mailbox
 
 ![](images/sns_4.png)
 
-14. Go to AWS -> S3 and create S3 bucket in which we will upload our script
+15. Go to AWS -> S3 and create S3 bucket in which we will upload our script
 
 Specify only **unique name**. This must be unique globally (not only in your account)!
 
 Leave all other settings as default.
 
-15. Go inside the new bucket and click on "Upload" and select ec2_script.sh from your local computer
+16. Go inside the new bucket and click on "Upload" and select ec2_script.sh from your local computer
 
 ![](images/s3_1.png)
 
@@ -133,7 +134,7 @@ while true; do
 done
 ```
 
-16. Go to AWS -> IAM -> Roles and create new IAM role to allow EC2 instance access S3 items and publish messages to SNS
+17. Go to AWS -> IAM -> Roles and create new IAM role to allow EC2 instance access S3 items and publish messages to SNS
 
 ![](images/iam_1.png)
 ![](images/iam_2.png)
@@ -144,42 +145,42 @@ Set name and review created role:
 
 Click on the "Create role".
 
-17. Go to AWS -> EC2 and assign the role to EC2 instance
+18. Go to AWS -> EC2 and assign the role to EC2 instance
 
 ![](images/ec2_6.png)
 ![](images/ec2_7.png)
 
-18. Go to AWS -> EC2 and connect with the instance
+19. Go to AWS -> EC2 and connect with the instance
 
 ![](images/ec2_4.png)
 ![](images/ec2_5.png)
 
-19. Download script from S3.
+20. Download script from S3.
 ```
 aws s3api get-object --bucket scripts-cywinski-bucket --key ec2_script.sh ec2_script.sh
 ```
 
-20. Set chmod to 777
+21. Set chmod to 777
 ```
 chmod 777 ec2_script.sh
 ```
 
-21. In AWS -> SNS -> Topics copy ARN of your SNS topic
+22. In AWS -> SNS -> Topics copy ARN of your SNS topic
 
 ![](images/sns_5.png)
 
 
-22.  In EC2 console set SNS_TOPIC_ARN env variable
+23.  In EC2 console set SNS_TOPIC_ARN env variable
 ```
 export SNS_TOPIC_ARN=arn:aws:sns:eu-central-1:467331071075:notification-sns
 ```
 
-23. Run the script
+24. Run the script
 ```
 ./ec2_script.sh
 ```
 
-24. Check your mailbox and find the notification
+25. Check your mailbox and find the notification
 
 # Create DynamoDB
 1. Go to AWS -> DynamoDB

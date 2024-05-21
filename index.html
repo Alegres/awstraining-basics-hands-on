@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HandsOn.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="content">Content</h1>
+<ul>
+<li><a href="#content">Content</a></li>
+<li><a href="#create-vpc">Create VPC</a></li>
+<li><a href="#create-static-s3-website">Create static S3 website</a></li>
+<li><a href="#create-ec2-sns-topic-and-run-notification-script">Create EC2, SNS topic and run notification script</a></li>
+<li><a href="#create-dynamodb">Create DynamoDB</a></li>
+<li><a href="#create-notification-lambda">Create notification Lambda</a></li>
+<li><a href="#create-ecr">Create ECR</a></li>
+<li><a href="#create-load-balancer">Create Load Balancer</a></li>
+<li><a href="#create-ecs-fargate">Create ECS Fargate</a></li>
+<li><a href="#deploy-our-application">Deploy our application</a></li>
+</ul>
+<h1 id="create-vpc">Create VPC</h1>
+<ol>
+<li>Go to AWS -&gt; VPC -&gt; Create VPC</li>
+<li>Select &quot;VPC and more&quot; to use the intuitive creator</li>
+</ol>
+<p>IPv4 CIDR block can be set to 10.0.0.0/22. It will provide more than 1000 IP addresses which is more than enough for this lab.</p>
+<p>No IPv6 CIDR is needed.</p>
+<p><img src="images/vpc_1.png" alt="">
+<img src="images/vpc_2.png" alt=""></p>
+<p>Choose 3 Availability Zones and leave other options as default.</p>
+<p>Creator should create:</p>
+<ul>
+<li>Internet gateway</li>
+<li>Three private route tables (one for each private subnet)</li>
+<li>One public route table for all public subnets</li>
+</ul>
+<ol start="3">
+<li>Check created VPC -&gt; Internet gateways</li>
+</ol>
+<p>It provides access to the Internet.</p>
+<ol start="4">
+<li>Check VPC -&gt; Route tables -&gt; public route table</li>
+</ol>
+<p>It contains route entry to the Internet gateway which makes all of the three subnets public.</p>
+<p><img src="images/vpc_3.png" alt="">
+<img src="images/vpc_4.png" alt=""></p>
+<ol start="5">
+<li>Check VPC -&gt; Route tables -&gt; private route table</li>
+</ol>
+<p>It contains prefix list with multiple IP addresses assigned to the S3 VPC Endpoint.</p>
+<p><img src="images/vpc_5.png" alt="">
+<img src="images/vpc_6.png" alt=""></p>
+<ol start="6">
+<li>Check created VPC -&gt; Endpoints</li>
+</ol>
+<p>There should be a S3 VPC Endpoint providing internal access to S3 service from private subnets.</p>
+<h1 id="create-static-s3-website">Create static S3 website</h1>
+<ul>
+<li>https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html</li>
+</ul>
+<h1 id="create-ec2-sns-topic-and-run-notification-script">Create EC2, SNS topic and run notification script</h1>
+<ol>
+<li>Go to AWS -&gt; EC2</li>
+<li>Click on &quot;Launch instance&quot;</li>
+<li>Fill name and select Amazon Linux as AMI</li>
+</ol>
+<p><img src="images/ec2_1.png" alt=""></p>
+<ol start="4">
+<li>Select t2.micro instance type and proceed without key pair, as we do not need SSH access for now</li>
+</ol>
+<p><img src="images/ec2_2.png" alt=""></p>
+<ol start="5">
+<li>Leave default settings for &quot;Network settings&quot;.</li>
+</ol>
+<p>We want to create EC2 instance in our <strong>default VPC</strong> to have a quick connection to it. Default VPC is always created automatically by AWS in our account and contains all stuff required to connect with the EC2 instance.</p>
+<p>For this excercise we do not have to create EC2 in our previously created VPC.</p>
+<ol start="6">
+<li>Leave default values for &quot;Configure storage&quot;</li>
+</ol>
+<p>AWS will automatically create a small storage.</p>
+<ol start="7">
+<li>Leave default values for &quot;Advanced details&quot;</li>
+<li>Confirm by clicking on &quot;Launch instance&quot;</li>
+</ol>
+<p>AWS will create additional resources on its own, such us security group, etc.</p>
+<ol start="9">
+<li>Wait some time until instance is &quot;Running&quot;</li>
+</ol>
+<p>It might take some time (~2 minutes).</p>
+<ol start="10">
+<li>Go to AWS -&gt; SNS -&gt; Create SNS topic</li>
+</ol>
+<p><img src="images/sns_1.png" alt=""></p>
+<p>Fill name and select &quot;Standard&quot; for the type.</p>
+<p>Leave other values as default.</p>
+<ol start="11">
+<li>Click on &quot;Create topic&quot;</li>
+<li>Create SNS subscription</li>
+</ol>
+<p><img src="images/sns_2.png" alt="">
+<img src="images/sns_3.png" alt=""></p>
+<ol start="13">
+<li>Confirm email subscription in your mailbox</li>
+</ol>
+<p><img src="images/sns_4.png" alt=""></p>
+<ol start="14">
+<li>Go to AWS -&gt; S3 and create S3 bucket in which we will upload our script</li>
+</ol>
+<p>Specify only <strong>unique name</strong>. This must be unique globally (not only in your account)!</p>
+<p>Leave all other settings as default.</p>
+<ol start="15">
+<li>Go inside the new bucket and click on &quot;Upload&quot; and select ec2_script.sh from your local computer</li>
+</ol>
+<p><img src="images/s3_1.png" alt=""></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-keyword">while</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">do</span>
+    <span class="hljs-comment"># Get used memory</span>
+    used_memory=$(free -m | awk <span class="hljs-string">'NR==2{print $3}'</span>)
+
+    <span class="hljs-comment"># Create JSON request body</span>
+    current_timestamp=$(date +%s)
+
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">"Current EC2 used memory: <span class="hljs-variable">$used_memory</span> | Timestamp: <span class="hljs-variable">$current_timestamp</span>"</span> &gt; message.txt
+
+    <span class="hljs-comment"># Publish message to SNS using AWS CLI</span>
+    aws sns publish --topic-arn <span class="hljs-variable">$SNS_TOPIC_ARN</span> --message file://message.txt
+
+    <span class="hljs-comment"># Wait for 120 seconds before the next iteration</span>
+    sleep 120
+<span class="hljs-keyword">done</span>
+</div></code></pre>
+<ol start="16">
+<li>Go to AWS -&gt; IAM -&gt; Roles and create new IAM role to allow EC2 instance access S3 items and publish messages to SNS</li>
+</ol>
+<p><img src="images/iam_1.png" alt="">
+<img src="images/iam_2.png" alt="">
+<img src="images/iam_3.png" alt=""></p>
+<p>Set name and review created role:
+<img src="images/iam_4.png" alt=""></p>
+<p>Click on the &quot;Create role&quot;.</p>
+<ol start="17">
+<li>Go to AWS -&gt; EC2 and assign the role to EC2 instance</li>
+</ol>
+<p><img src="images/ec2_6.png" alt="">
+<img src="images/ec2_7.png" alt=""></p>
+<ol start="18">
+<li>Go to AWS -&gt; EC2 and connect with the instance</li>
+</ol>
+<p><img src="images/ec2_4.png" alt="">
+<img src="images/ec2_5.png" alt=""></p>
+<ol start="19">
+<li>Download script from S3.</li>
+</ol>
+<pre class="hljs"><code><div>aws s3api get-object --bucket scripts-cywinski-bucket --key ec2_script.sh ec2_script.sh
+</div></code></pre>
+<ol start="20">
+<li>Set chmod to 777</li>
+</ol>
+<pre class="hljs"><code><div>chmod 777 ec2_script.sh
+</div></code></pre>
+<ol start="21">
+<li>In AWS -&gt; SNS -&gt; Topics copy ARN of your SNS topic</li>
+</ol>
+<p><img src="images/sns_5.png" alt=""></p>
+<ol start="22">
+<li>In EC2 console set SNS_TOPIC_ARN env variable</li>
+</ol>
+<pre class="hljs"><code><div>export SNS_TOPIC_ARN=arn:aws:sns:eu-central-1:467331071075:notification-sns
+</div></code></pre>
+<ol start="23">
+<li>Run the script</li>
+</ol>
+<pre class="hljs"><code><div>./ec2_script.sh
+</div></code></pre>
+<ol start="24">
+<li>Check your mailbox and find the notification</li>
+</ol>
+<h1 id="create-dynamodb">Create DynamoDB</h1>
+<ol>
+<li>Go to AWS -&gt; DynamoDB</li>
+<li>Click on &quot;Create table&quot;</li>
+</ol>
+<p><img src="images/dynamo_1.png" alt=""></p>
+<ol start="3">
+<li>Fill required table data</li>
+</ol>
+<p><img src="images/dynamo_2.png" alt=""></p>
+<p>Table name should be set to &quot;Measurement&quot;, as this is the table that our application will try to connect with.</p>
+<p>Partition key must be set to &quot;deviceId&quot; (String) and sort key must be set to &quot;creationTime&quot; (Number).</p>
+<ol start="4">
+<li>Select default table settings and create table</li>
+</ol>
+<p><img src="images/dynamo_3.png" alt=""></p>
+<h1 id="create-notification-lambda">Create notification Lambda</h1>
+<ol>
+<li>First, go to AWS -&gt; DynamoDB -&gt; Tables -&gt; Measurements and &quot;Export and streams&quot;</li>
+</ol>
+<p><img src="images/lambda_1.png" alt=""></p>
+<ol start="2">
+<li>Select &quot;New image&quot; and turn on stream</li>
+</ol>
+<p><img src="images/lambda_2.png" alt=""></p>
+<p>Thanks to this setting, we will be able to access updated entry in our notification Lambda function later on.</p>
+<ol start="3">
+<li>Go to AWS -&gt; Lambda and click on &quot;Create a function&quot;</li>
+</ol>
+<p><img src="images/lambda_3.png" alt=""></p>
+<ol start="4">
+<li>Fill basic function information</li>
+</ol>
+<p><img src="images/lambda_4.png" alt=""></p>
+<p>Function will be written in Python and we want to author it from scratch.</p>
+<ol start="5">
+<li>Make sure that under &quot;Change default execution role&quot; basic role will be created for our Lambda and create function</li>
+</ol>
+<p><img src="images/lambda_5.png" alt=""></p>
+<ol start="6">
+<li>Go to AWS -&gt; IAM -&gt; Roles and find Lambda role</li>
+</ol>
+<p><img src="images/lambda_8.png" alt=""></p>
+<ol start="7">
+<li>Attach new policy to the existing role</li>
+</ol>
+<p><img src="images/lambda_9.png" alt=""></p>
+<ol start="8">
+<li>Search for &quot;AWSLambdaDynamoDBExecutionRole&quot; and click on &quot;Add permissions&quot;</li>
+</ol>
+<p><img src="images/lambda_10.png" alt=""></p>
+<ol start="9">
+<li>Repeat steps 6 - 8 and do the same, but attach &quot;AmazonSNSFullAccess&quot; policy this time</li>
+</ol>
+<p><img src="images/lambda_15.png" alt=""></p>
+<p>This will allow our Lambda to send notifications to our topic.</p>
+<ol start="10">
+<li>Go to AWS -&gt; Lambda -&gt; send-notification-lambda and click on &quot;Add trigger&quot;</li>
+</ol>
+<p><img src="images/lambda_6.png" alt=""></p>
+<ol start="11">
+<li>Fill trigger details and click on &quot;Add&quot;</li>
+</ol>
+<p><img src="images/lambda_7.png" alt=""></p>
+<p>We should be able to create the trigger, as we have extended the existing Lambda role with DynamoDB policy.</p>
+<ol start="12">
+<li>Go to &quot;Code&quot; tab, copy-paste below Lambda code and click on &quot;Deploy&quot;</li>
+</ol>
+<p><img src="images/lambda_11.png" alt=""></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">import</span> boto3
+<span class="hljs-keyword">import</span> logging
+<span class="hljs-keyword">import</span> os
+
+<span class="hljs-comment"># Configure logging​</span>
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+<span class="hljs-comment"># Get SNS topic ARN from env variable</span>
+sns_topic_arn = os.getenv(<span class="hljs-string">'SNS_TOPIC_ARN'</span>)
+
+<span class="hljs-comment"># Create SNS client​</span>
+sns_client = boto3.client(<span class="hljs-string">'sns'</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lambda_handler</span><span class="hljs-params">(event, context)</span>:</span>
+    <span class="hljs-keyword">for</span> record <span class="hljs-keyword">in</span> event[<span class="hljs-string">'Records'</span>]:
+        <span class="hljs-keyword">if</span> record[<span class="hljs-string">'eventName'</span>] == <span class="hljs-string">'INSERT'</span>:  <span class="hljs-comment"># React only on PutItem events​</span>
+            <span class="hljs-comment"># Extract the item data from the event​</span>
+            item_data = record[<span class="hljs-string">'dynamodb'</span>][<span class="hljs-string">'NewImage'</span>]
+
+            <span class="hljs-comment"># Convert the data to JSON​</span>
+            json_data = json.dumps(item_data)
+
+            <span class="hljs-comment"># Publish the item data to SNS topic​</span>
+            response = sns_client.publish(
+                TopicArn=sns_topic_arn,
+                Message=json_data
+            )
+
+            <span class="hljs-comment"># Log the published item and response​</span>
+            logger.info(<span class="hljs-string">"Published item to SNS topic: %s"</span>, response)
+</div></code></pre>
+<ol start="13">
+<li>Go to SNS -&gt; Topics and copy ARN of the notification topic</li>
+</ol>
+<p><img src="images/lambda_12.png" alt=""></p>
+<ol start="14">
+<li>Go back to Lambda -&gt; send-notification-lambda, open &quot;Configuration&quot; tab, go to &quot;Environment variables&quot; and click on &quot;Edit&quot;</li>
+</ol>
+<p><img src="images/lambda_13.png" alt=""></p>
+<ol start="15">
+<li>Add new &quot;SNS_TOPIC_ARN&quot; environment variable and click on &quot;Save&quot;</li>
+</ol>
+<p><img src="images/lambda_14.png" alt=""></p>
+<p>This variable will be used in execution to point to our SNS topic and send notification.</p>
+<ol start="16">
+<li>Go to AWS -&gt; DynamoDB -&gt; Tables -&gt; Measurements -&gt; Explore table items</li>
+</ol>
+<p><img src="images/lambda_16.png" alt=""></p>
+<ol start="17">
+<li>Click on &quot;Create item&quot;</li>
+</ol>
+<p><img src="images/lambda_17.png" alt=""></p>
+<ol start="18">
+<li>Fill new record with some dummy data and click on &quot;Create item&quot;</li>
+</ol>
+<p><img src="images/lambda_18.png" alt=""></p>
+<ol start="19">
+<li>Verify if you have received the notification on your email</li>
+</ol>
+<h1 id="create-ecr">Create ECR</h1>
+<ol>
+<li>Go to AWS -&gt; Elastic Container Registry and click on &quot;Create repository&quot;</li>
+</ol>
+<p><img src="images/ecr_1.png" alt=""></p>
+<ol start="2">
+<li>Fill basic details and click on &quot;Create repository&quot;</li>
+</ol>
+<p><img src="images/ecr_2.png" alt=""></p>
+<h1 id="create-load-balancer">Create Load Balancer</h1>
+<ol>
+<li>Go to AWS -&gt; EC2 -&gt; Security Groups and click on &quot;Create security group&quot;</li>
+</ol>
+<p><img src="images/lb_1.png" alt=""></p>
+<ol start="2">
+<li>Add one &quot;Inbound rule&quot; to allow access from the Internet and click on &quot;Create security group&quot;</li>
+</ol>
+<p><img src="images/lb_2.png" alt=""></p>
+<p><strong>Make sure that you have selected our custom VPC instead of the default one.</strong></p>
+<ol start="3">
+<li>Go to AWS -&gt; EC2 -&gt; Load Balancing -&gt; Target groups and click on &quot;Create target group&quot;</li>
+</ol>
+<p><img src="images/lb_3.png" alt=""></p>
+<ol start="4">
+<li>Select &quot;IP addresses&quot; target type, specify name of your target group and select &quot;HTTP&quot; protocol and port 80</li>
+</ol>
+<p><img src="images/lb_4.png" alt=""></p>
+<ol start="5">
+<li>Select IPv4, VPC, Protocol version and setup health checks</li>
+</ol>
+<p><img src="images/lb_5.png" alt=""></p>
+<p><strong>Make sure to select our custom VPC instead of the default one.</strong></p>
+<p><code>/actuator/health</code> is the endpoint exposed by our application that provides health status.</p>
+<ol start="6">
+<li>
+<p>Leave other attributes untouched and click on &quot;Next&quot;</p>
+</li>
+<li>
+<p>In the next overview <strong>do not specify any IP targets</strong>, just click on &quot;Create target group&quot;</p>
+</li>
+</ol>
+<p><img src="images/lb_6.png" alt=""></p>
+<p>ECS Fargate will register IP addresses of its tasks to the target group on its own, we do not need to specify it manually.</p>
+<ol start="8">
+<li>Go to EC2 -&gt; Load balancers and click on &quot;Create load balancer&quot;</li>
+</ol>
+<p><img src="images/lb_7.png" alt=""></p>
+<ol start="9">
+<li>Click on &quot;Create&quot; under Application Load Balancer</li>
+</ol>
+<p><img src="images/lb_8.png" alt=""></p>
+<ol start="10">
+<li>Fill initial details</li>
+</ol>
+<p><img src="images/lb_9.png" alt=""></p>
+<p>We will be creating &quot;Internet-facing&quot; load balancer.</p>
+<ol start="11">
+<li>Configure &quot;Network mapping&quot;</li>
+</ol>
+<p><img src="images/lb_10.png" alt=""></p>
+<p><strong>Make sure to select our custom VPC instead of the default one.</strong></p>
+<p>Select all three AZs:</p>
+<ul>
+<li>eu-central-1a</li>
+<li>eu-central-1b</li>
+<li>eu-central-1c</li>
+</ul>
+<p>Select only <strong>public subnets</strong> in each AZ.</p>
+<ol start="12">
+<li>Select previously created load balancer Security Group</li>
+</ol>
+<p><img src="images/lb_11.png" alt=""></p>
+<ol start="13">
+<li>Add listener by selecting previously created Target Group</li>
+</ol>
+<p><img src="images/lb_12.png" alt=""></p>
+<p>Make sure that selected protocol is &quot;HTTP&quot; and port is 80.</p>
+<ol start="14">
+<li>Leave other values unchanged and click on &quot;Create load balancer&quot;</li>
+</ol>
+<p><img src="images/lb_13.png" alt=""></p>
+<h1 id="create-ecs-fargate">Create ECS Fargate</h1>
+<ol>
+<li>Go to AWS -&gt; Elastic Container Service and click on &quot;Create cluster&quot;</li>
+</ol>
+<p><img src="images/ecs_1.png" alt=""></p>
+<ol start="2">
+<li>Fill in cluster name, select &quot;AWS Fargate (serverless)&quot; as Infrastructure and click &quot;Create&quot;</li>
+</ol>
+<p><img src="images/ecs_2.png" alt=""></p>
+<p>Wait until the creation has finished.</p>
+<ol start="3">
+<li>Go to AWS -&gt; IAM -&gt; Roles and click on &quot;Create role&quot;</li>
+</ol>
+<p><img src="images/ecs_3.png" alt=""></p>
+<ol start="4">
+<li>Select Elastic Container Service as &quot;Service or use case&quot; and Elatic Container Service Task as &quot;Use case&quot;</li>
+</ol>
+<p><img src="images/ecs_4.png" alt=""></p>
+<p>With this configuration, ECS Task will be able to assume the role that we are now creating.</p>
+<ol start="5">
+<li>Do not specify any permissions policy, just click on &quot;Next&quot;</li>
+</ol>
+<p><img src="images/ecs_5.png" alt=""></p>
+<p>We will specify inline policy and attach it to the role later.</p>
+<ol start="6">
+<li>In the &quot;Name, review and create&quot; view specify only role name and click on &quot;Create role&quot;</li>
+</ol>
+<p><img src="images/ecs_6.png" alt=""></p>
+<p>First, we are creating ECS Task Role.</p>
+<ol start="7">
+<li>Repeat steps 3 - 6, but this tame create ECS Task <strong>Execution</strong> Role</li>
+</ol>
+<p><img src="images/ecs_7.png" alt=""></p>
+<p><strong>The only difference (for now) will be the role name.</strong></p>
+<ol start="8">
+<li>In roles list first search for &quot;task-role&quot; and then select it</li>
+</ol>
+<p><img src="images/ecs_8.png" alt=""></p>
+<ol start="9">
+<li>Click on &quot;Add permissions&quot; and &quot;Create inline policy&quot;</li>
+</ol>
+<p><img src="images/ecs_9.png" alt=""></p>
+<ol start="10">
+<li>Select JSON editor, paste below policy and click on &quot;Next&quot;</li>
+</ol>
+<p><img src="images/ecs_10.png" alt=""></p>
+<pre class="hljs"><code><div>{
+    <span class="hljs-attr">"Version"</span>: <span class="hljs-string">"2012-10-17"</span>,
+    <span class="hljs-attr">"Statement"</span>: [
+        {
+            <span class="hljs-attr">"Action"</span>: [
+                <span class="hljs-string">"logs:*"</span>,
+                <span class="hljs-string">"CloudWatch:*"</span>,
+                <span class="hljs-string">"kinesis:*"</span>
+            ],
+            <span class="hljs-attr">"Effect"</span>: <span class="hljs-string">"Allow"</span>,
+            <span class="hljs-attr">"Resource"</span>: <span class="hljs-string">"*"</span>
+        },
+        {
+            <span class="hljs-attr">"Action"</span>: <span class="hljs-string">"dynamodb:*"</span>,
+            <span class="hljs-attr">"Effect"</span>: <span class="hljs-string">"Allow"</span>,
+            <span class="hljs-attr">"Resource"</span>: <span class="hljs-string">"*"</span>
+        },
+        {
+            <span class="hljs-attr">"Effect"</span>: <span class="hljs-string">"Allow"</span>,
+            <span class="hljs-attr">"Action"</span>: <span class="hljs-string">"ssm:GetParametersByPath"</span>,
+            <span class="hljs-attr">"Resource"</span>: [
+                <span class="hljs-string">"arn:aws:ssm:eu-central-1:*:parameter/config/application*"</span>,
+                <span class="hljs-string">"arn:aws:ssm:eu-central-1:*:parameter/config/backend*"</span>
+            ]
+        }
+    ]
+}
+</div></code></pre>
+<ol start="11">
+<li>Enter policy name and click on &quot;Create policy&quot;</li>
+</ol>
+<p><img src="images/ecs_11.png" alt="ecs_11"></p>
+<ol start="12">
+<li>Repeat steps 8 - 11, but this time for Task Execution Role and copy-paste the below policy</li>
+</ol>
+<p><img src="images/ecs_12.png" alt=""></p>
+<pre class="hljs"><code><div>{
+    <span class="hljs-attr">"Version"</span>: <span class="hljs-string">"2012-10-17"</span>,
+    <span class="hljs-attr">"Statement"</span>: [
+        {
+            <span class="hljs-attr">"Action"</span>: [
+                <span class="hljs-string">"logs:*"</span>,
+                <span class="hljs-string">"ecr:GetDownloadUrlForLayer"</span>,
+                <span class="hljs-string">"ecr:BatchGetImage"</span>,
+                <span class="hljs-string">"ecr:GetAuthorizationToken"</span>,
+                <span class="hljs-string">"CloudWatch:*"</span>,
+                <span class="hljs-string">"ecr:BatchCheckLayerAvailability"</span>
+            ],
+            <span class="hljs-attr">"Effect"</span>: <span class="hljs-string">"Allow"</span>,
+            <span class="hljs-attr">"Resource"</span>: <span class="hljs-string">"*"</span>
+        },
+        {
+            <span class="hljs-attr">"Action"</span>: <span class="hljs-string">"secretsmanager:GetSecretValue"</span>,
+            <span class="hljs-attr">"Effect"</span>: <span class="hljs-string">"Allow"</span>,
+            <span class="hljs-attr">"Resource"</span>: <span class="hljs-string">"*"</span>
+        },
+        {
+            <span class="hljs-attr">"Action"</span>: <span class="hljs-string">"kms:Decrypt"</span>,
+            <span class="hljs-attr">"Effect"</span>: <span class="hljs-string">"Allow"</span>,
+            <span class="hljs-attr">"Resource"</span>: <span class="hljs-string">"*"</span>
+        }
+    ]
+}
+</div></code></pre>
+<ol start="13">
+<li>Go to EC2 -&gt; Security Groups and click on &quot;Create security group&quot;</li>
+</ol>
+<p><img src="images/lb_1.png" alt=""></p>
+<ol start="14">
+<li>Specify name, description, VPC and create one inbound rule to allow access from Load Balancer to Fargate and click on &quot;Create security group&quot;</li>
+</ol>
+<p><img src="images/ecs_13.png" alt=""></p>
+<p><strong>Make sure to select our custom VPC instead of default one.</strong></p>
+<p>Select previously created Load Balancer Security Group as &quot;Source&quot;.</p>
+<ol start="15">
+<li>Go to AWS -&gt; Elastic Container Service -&gt; Task definitions and click on &quot;Create new task definition&quot;</li>
+</ol>
+<p><img src="images/ecs_14.png" alt=""></p>
+<ol start="16">
+<li>Specify name</li>
+</ol>
+<p><img src="images/ecs_15.png" alt=""></p>
+<ol start="17">
+<li>Select AWS Fargate as &quot;Launch type&quot;, appropiate &quot;Task size&quot; and previously created &quot;Task role&quot; and &quot;Task execution role&quot;</li>
+</ol>
+<p><img src="images/ecs_16.png" alt=""></p>
+<ol start="18">
+<li>In a new tab, go to Elastic Container Registry and copy URI of your repository</li>
+</ol>
+<p><img src="images/ecs_17.png" alt=""></p>
+<ol start="19">
+<li>Go back to previous tab and fill Container details by setting red-marked values and leaving other values unchanged</li>
+</ol>
+<p><img src="images/ecs_18.png" alt=""></p>
+<p>It is important to add <strong>:latest</strong> to the copied ECR URI, so that the most recent version of our application will be used when deploying new tasks.</p>
+<ol start="20">
+<li>Add two environmental variables that will tell the task in which environment it is running and, also, run our application with a proper profile</li>
+</ol>
+<p><img src="images/ecs_19.png" alt=""></p>
+<ol start="21">
+<li>
+<p>Leave other attributes as default and click on &quot;Create&quot;</p>
+</li>
+<li>
+<p>Go to &quot;Clusters&quot; (in left menu), select previously created Fargate cluster and under &quot;Services&quot; click on &quot;Create&quot;</p>
+</li>
+</ol>
+<p><img src="images/ecs_20.png" alt="ecs_20"></p>
+<ol start="23">
+<li>Select &quot;Launch type&quot; simply as &quot;Fargate&quot;</li>
+</ol>
+<p><img src="images/ecs_21.png" alt=""></p>
+<ol start="24">
+<li>Specify &quot;Deployment configuration&quot;</li>
+</ol>
+<p><img src="images/ecs_22.png" alt=""></p>
+<p>Initially, set &quot;Desired tasks&quot; to 0, as we do not want to start our service yet, as there is still no application image available in ECR and, therefore, we would receive errors.</p>
+<ol start="25">
+<li>Configure &quot;Networking&quot;</li>
+</ol>
+<p><img src="images/ecs_23.png" alt=""></p>
+<p><strong>Make sure to select our custom VPC instead of default VPC.</strong></p>
+<p>Select only public subnets. We do not want to select private subnets in this module, as then we would have to create VPC Endpoints to allow access to AWS services such as ECR from within tasks that were placed in the private subnets.</p>
+<p>Select previously created Fargate Security Group.</p>
+<p>Leave Public IP as turned on.</p>
+<ol>
+<li>Configure Load Balancer</li>
+</ol>
+<p><img src="images/ecs_24.png" alt=""></p>
+<p>Select previously created Application Load Balancer and appropiate container.</p>
+<ol start="27">
+<li>Configure Listener &amp; Target Group</li>
+</ol>
+<p><img src="images/ecs_25.png" alt=""></p>
+<ol start="28">
+<li>Leave other options as default and click on &quot;Create&quot;</li>
+</ol>
+<h1 id="deploy-our-application">Deploy our application</h1>
+<ol>
+<li>Go to AWS -&gt; Cloud9 and click on &quot;Create environment&quot;</li>
+</ol>
+<p><img src="images/deploy_1.png" alt=""></p>
+<ol start="2">
+<li>Fill initial data</li>
+</ol>
+<p><img src="images/deploy_2.png" alt=""></p>
+<ol start="3">
+<li>Select <strong>t2.micro</strong> &quot;Instance type&quot; and leave other values as default</li>
+</ol>
+<p><img src="images/deploy_3.png" alt=""></p>
+<ol start="4">
+<li>Click on &quot;Create&quot; and wait some time untill the environment is created</li>
+</ol>
+<p><img src="images/deploy_4.png" alt=""></p>
+<p>Underhood, AWS will create an EC2 instance for us. This takes some minutes.</p>
+<ol start="5">
+<li>Select created environment and click on &quot;Open in Cloud9&quot;</li>
+</ol>
+<p><img src="images/deploy_5.png" alt=""></p>
+<ol start="6">
+<li>Clone repository using terminal</li>
+</ol>
+<p><img src="images/deploy_6.png" alt=""></p>
+<pre class="hljs"><code><div>git <span class="hljs-built_in">clone</span> https://github.com/Alegres/awstraining-basics.git
+</div></code></pre>
+<ol start="7">
+<li>Install Maven by running the following commands one after another</li>
+</ol>
+<pre class="hljs"><code><div>sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+</div></code></pre>
+<pre class="hljs"><code><div>sudo sed -i s/\<span class="hljs-variable">$releasever</span>/6/g /etc/yum.repos.d/epel-apache-maven.repo
+</div></code></pre>
+<pre class="hljs"><code><div>sudo yum install -y apache-maven
+</div></code></pre>
+<ol start="8">
+<li>Go to awstraining-basics directory</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-built_in">cd</span> awstraining-basics/
+</div></code></pre>
+<ol start="9">
+<li>Build Java application using Maven</li>
+</ol>
+<pre class="hljs"><code><div>mvn clean install
+</div></code></pre>
+<ol start="10">
+<li>Create Docker image</li>
+</ol>
+<pre class="hljs"><code><div>docker build -t myapp .
+</div></code></pre>
+<ol start="11">
+<li>Go to AWS -&gt; ECR -&gt; your app repository and click on &quot;View push commands&quot;</li>
+</ol>
+<p><img src="images/deploy_7.png" alt=""></p>
+<p><img src="images/deploy_8.png" alt=""></p>
+<ol start="12">
+<li>Login to AWS ECR by using the <strong>ecr get-login-password</strong> command from the pop-up dialog</li>
+</ol>
+<pre class="hljs"><code><div>aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 467331071075.dkr.ecr.eu-central-1.amazonaws.com
+</div></code></pre>
+<p>This will allow to push Docker images.</p>
+<p><strong>When running locally - it is important to provide --profile option and specify your AWS profile.</strong></p>
+<ol start="13">
+<li>Tag Docker image with the <strong>latest</strong> tag</li>
+</ol>
+<pre class="hljs"><code><div>docker tag myapp:latest 467331071075.dkr.ecr.eu-central-1.amazonaws.com/myapp:latest
+</div></code></pre>
+<ol start="14">
+<li>Push image to ECR</li>
+</ol>
+<pre class="hljs"><code><div>docker push 467331071075.dkr.ecr.eu-central-1.amazonaws.com/myapp:latest
+</div></code></pre>
+<ol start="15">
+<li>Go to AWS -&gt; ECR and confirm that the image was pushed</li>
+</ol>
+<p><img src="images/deploy_9.png" alt=""></p>
+<ol start="16">
+<li>Go to AWS -&gt; ECS -&gt; Your Fargate cluster -&gt; select your service and click on &quot;Update&quot;</li>
+</ol>
+<p><img src="images/deploy_10.png" alt=""></p>
+<ol start="17">
+<li>Select &quot;Force new deployment&quot;, specify &quot;Desired tasks&quot; to 3, leave other options untouched and click on &quot;Update&quot; button</li>
+</ol>
+<p><img src="images/deploy_11.png" alt=""></p>
+<ol start="18">
+<li>Verify if the deployment has started</li>
+</ol>
+<p><img src="images/deploy_12.png" alt=""></p>
+<ol start="19">
+<li>Under &quot;Tasks&quot; tab confirm that all 3 tasks are in state &quot;Running&quot;</li>
+</ol>
+<p><img src="images/deploy_13.png" alt=""></p>
+<ol start="20">
+<li>Wait some time (around 3 minutes) and then go to AWS -&gt; EC2 -&gt; Target groups, select your Target Group and confirm that all three tasks have been registered as &quot;targets&quot; with a &quot;healthy&quot; state</li>
+</ol>
+<p><img src="images/deploy_16.png" alt=""></p>
+<ol start="21">
+<li>Go to AWS -&gt; EC2 -&gt; Load Balancers and select your Load Balancer</li>
+</ol>
+<p><img src="images/deploy_14.png" alt=""></p>
+<ol start="22">
+<li>Copy DNS of your Load Balancer</li>
+</ol>
+<p><img src="images/deploy_15.png" alt=""></p>
+<ol start="23">
+<li>Execute test request (just adjust URL to DNS of your Load Balancer)</li>
+</ol>
+<p>Create test measurement</p>
+<pre class="hljs"><code><div>curl -vk <span class="hljs-string">'http://myapp-lb-564621670.eu-central-1.elb.amazonaws.com/device/v1/test'</span> \
+--header <span class="hljs-string">'Content-Type: application/json'</span> \
+-u testUser:welt \
+--data <span class="hljs-string">'{
+    "type": "test",
+    "value": -510.190
+}'</span>
+</div></code></pre>
+<p>Retrieve mesurements</p>
+<pre class="hljs"><code><div>curl -vk http://myapp-lb-564621670.eu-central-1.elb.amazonaws.com/device/v1/<span class="hljs-built_in">test</span> -u testUser:welt
+</div></code></pre>
+
+</body>
+</html>

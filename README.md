@@ -84,11 +84,13 @@ AWS will create additional resources on its own, such us security group, etc.
 
 It might take some time (~2 minutes).
 
-10. Go to AWS -> SNS -> Create SNS topic
+10. Go to AWS -> SNS -> Topics and click on "Create topic"
 
-![](images/sns_1.png)
+![](images/sns_0.png)
 
 Fill name and select "Standard" for the type.
+
+![](images/sns_1.png)
 
 Leave other values as default.
 

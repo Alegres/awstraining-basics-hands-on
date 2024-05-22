@@ -488,11 +488,11 @@ First, we are creating ECS Task Role.
 }
 ```
 
-11.  Enter policy name and click on "Create policy"
+11. Enter policy name and click on "Create policy"
 
-![ecs_11](images/ecs_11.png)
+![](images/ecs_11.png)
 
-12. Repeat steps 8 - 11, but this time for Task Execution Role and copy-paste the below policy
+12.  Repeat steps 8 - 11, but this time for Task Execution Role and copy-paste the below policy
 
 ![](images/ecs_12.png)
 

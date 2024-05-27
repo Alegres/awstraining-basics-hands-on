@@ -1,5 +1,6 @@
 # Content
 - [Content](#content)
+- [Create non-root user](#create-non-root-user)
 - [Create VPC](#create-vpc)
 - [Create static S3 website](#create-static-s3-website)
 - [Create EC2, SNS topic and run notification script](#create-ec2-sns-topic-and-run-notification-script)
@@ -9,6 +10,58 @@
 - [Create Load Balancer](#create-load-balancer)
 - [Create ECS Fargate](#create-ecs-fargate)
 - [Deploy our application](#deploy-our-application)
+
+# Create non-root user
+1. Go to AWS and login to your Sandbox account as root (using e-mail)
+
+![](images/init_1.png)
+
+2. Go to AWS -> IAM
+3. Go to Users and click on "Create user"
+
+![](images/init_2.png)
+
+4. Provide user details and click on "Next"
+
+![](images/init_3.png)
+
+Enable console access.
+Do not require password reset at the next login.
+
+5. Attach user to "Admins" user group and click on "Next"
+
+![](images/init_4.png)
+
+You could also attach **AdministrativeAccess** policy directly to the user.
+
+**Attention!** Usually, we would like to carefully investigate which policies are actually needed for the user. However, in our case we really want to perform as an administrator, therefore, we are granting the administrative access policy to our user.
+
+6. Review details and click on "Create user"
+
+7. Copy Console-sign-in URL, save it in your browser and go back to the users list
+   
+![](images/init_5.png)
+
+8. Select your user from the list and open its details
+9. Open "Security credentials" tab
+
+![](images/init_6.png)
+
+10. Scroll down and click on "Create access key"
+
+![](images/init_7.png)
+
+11. Select CLI use case, confirm disclaimer and click on "Next"
+
+![](images/init_8.png)
+
+12. Specify some tag and click on "Create access key"
+
+![](images/init_9.png)
+
+13. Make sure that you have copied both **Access key** and **Secret access key** and stored securely, as we will later use them in AWS credentials file and in GitHub pipelines
+
+![](images/init_10.png)
 
 # Create VPC
 1. Go to AWS -> VPC -> Create VPC

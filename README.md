@@ -800,3 +800,24 @@ Retrieve mesurements
 curl -vk http://myapp-lb-564621670.eu-central-1.elb.amazonaws.com/device/v1/test -u testUser:welt
 ```
 
+# Manual clean-up
+Please clean up the following resources (order might be important):
+
+* Application load balancer​
+* Listener, target group​
+* Load balancer itself​
+* ECS​
+* ECR​
+* EC2​
+* Elastic IP​
+* DynamoDB​
+* Lambda​
+* S3​
+* SNS​
+* CloudWatch​
+* VPC​
+   * Subnets​
+   * Route table​
+   * Endpoints
+   * VPC itself​
+

@@ -10,6 +10,7 @@
 - [Create Load Balancer](#create-load-balancer)
 - [Create ECS Fargate](#create-ecs-fargate)
 - [Deploy our application](#deploy-our-application)
+- [Manual clean-up](#manual-clean-up)
 
 # Create non-root user
 1. Go to AWS and login to your Sandbox account as root (using e-mail)

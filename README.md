@@ -805,8 +805,8 @@ curl -vk http://myapp-lb-564621670.eu-central-1.elb.amazonaws.com/device/v1/test
 Please clean up the following resources (order might be important):
 
 * Application load balancer​
-* Listener, target group​
-* Load balancer itself​
+   * Listener, target group​
+   * Load balancer itself​
 * ECS​
 * ECR​
 * EC2​

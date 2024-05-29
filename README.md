@@ -246,7 +246,7 @@ export SNS_TOPIC_ARN=arn:aws:sns:eu-central-1:467331071075:notification-sns
 
 ![](images/dynamo_2.png)
 
-Table name should be set to "Measurement", as this is the table that our application will try to connect with.
+Table name should be set to "Measurements", as this is the table that our application will try to connect with.
 
 Partition key must be set to "deviceId" (String) and sort key must be set to "creationTime" (Number).
 

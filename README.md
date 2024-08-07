@@ -129,7 +129,26 @@ For this excercise we do not have to create EC2 in our previously created VPC.
 
 AWS will automatically create a small storage.
 
-7. Leave default values for "Advanced details"
+7. Go into "Advanced details" and configure User data
+
+```bash
+sudo yum install git -y
+sudo wget
+http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo
+-O /etc/yum.repos.d/epel-apache-maven.repo
+sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+sudo yum install maven -y
+sudo yum install docker
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
+sudo chmod 666 /var/run/docker.sock
+sudo yum install java-17-amazon-corretto-devel
+```
+
+![](images/ec2_8.png)
+
+By doing this our EC2 instance will install packages that are needed for the deployment that we will perform at the end of the training.
+
 8. Confirm by clicking on "Launch instance"
 
 AWS will create additional resources on its own, such us security group, etc.
@@ -194,12 +213,15 @@ done
 ![](images/iam_2.png)
 ![](images/iam_3.png)
 
+Additionally, we should add the below permission to be able to push images to ECR later during deployment:
+![](images/iam_5.png)
+
 Set name and review created role:
 ![](images/iam_4.png)
 
 Click on the "Create role".
 
-18. Go to AWS -> EC2 and assign the role to EC2 instance
+1.  Go to AWS -> EC2 and assign the role to EC2 instance
 
 ![](images/ec2_6.png)
 ![](images/ec2_7.png)
@@ -659,75 +681,39 @@ Select previously created Application Load Balancer and appropiate container.
 28. Leave other options as default and click on "Create"
 
 # Deploy our application
-1. Go to AWS -> Cloud9 and click on "Create environment"
+1. Go to AWS -> EC2 and run our previously created instance
 
-![](images/deploy_1.png)
-
-2. Fill initial data
-
-![](images/deploy_2.png)
-
-3. Select **t2.micro** "Instance type" and leave other values as default
-
-![](images/deploy_3.png)
-
-4. Click on "Create" and wait some time untill the environment is created
-
-![](images/deploy_4.png)
-
-Underhood, AWS will create an EC2 instance for us. This takes some minutes.
-
-5. Select created environment and click on "Open in Cloud9"
-
-![](images/deploy_5.png)
-
-6. Clone repository using terminal
-
-![](images/deploy_6.png)
+2. Clone repository using terminal
 
 ```bash
 git clone https://github.com/Alegres/awstraining-basics.git
 ```
 
-7. Install Maven by running the following commands one after another
-
-```bash
-sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
-```
-
-```bash
-sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
-```
-
-```bash
-sudo yum install -y apache-maven
-```
-
-8. Go to awstraining-basics directory
+3. Go to awstraining-basics directory
 
 ```bash
 cd awstraining-basics/
 ```
 
-9. Build Java application using Maven
+4. Build Java application using Maven
 
 ```bash
 mvn clean install
 ```
 
-10. Create Docker image
+5. Create Docker image
 
 ```bash
 docker build -t myapp .
 ```
 
-11. Go to AWS -> ECR -> your app repository and click on "View push commands"
+6. Go to AWS -> ECR -> your app repository and click on "View push commands"
 
 ![](images/deploy_7.png)
 
 ![](images/deploy_8.png)
 
-12.   Login to AWS ECR by using the **ecr get-login-password** command from the pop-up dialog
+7.   Login to AWS ECR by using the **ecr get-login-password** command from the pop-up dialog
 
 ```bash
 aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 467331071075.dkr.ecr.eu-central-1.amazonaws.com
@@ -737,51 +723,51 @@ This will allow to push Docker images.
 
 **When running locally - it is important to provide --profile option and specify your AWS profile.**
 
-13. Tag Docker image with the **latest** tag
+8. Tag Docker image with the **latest** tag
 
 ```bash
 docker tag myapp:latest 467331071075.dkr.ecr.eu-central-1.amazonaws.com/myapp:latest
 ```
 
-14. Push image to ECR
+9. Push image to ECR
 
 ```bash
 docker push 467331071075.dkr.ecr.eu-central-1.amazonaws.com/myapp:latest
 ```
 
-15. Go to AWS -> ECR and confirm that the image was pushed
+10. Go to AWS -> ECR and confirm that the image was pushed
 
 ![](images/deploy_9.png)
 
-16. Go to AWS -> ECS -> Your Fargate cluster -> select your service and click on "Update"
+11. Go to AWS -> ECS -> Your Fargate cluster -> select your service and click on "Update"
 
 ![](images/deploy_10.png)
 
-17. Select "Force new deployment", specify "Desired tasks" to 3, leave other options untouched and click on "Update" button
+12. Select "Force new deployment", specify "Desired tasks" to 3, leave other options untouched and click on "Update" button
 
 ![](images/deploy_11.png)
 
-18. Verify if the deployment has started
+13. Verify if the deployment has started
 
 ![](images/deploy_12.png)
 
-19. Under "Tasks" tab confirm that all 3 tasks are in state "Running"
+14. Under "Tasks" tab confirm that all 3 tasks are in state "Running"
 
 ![](images/deploy_13.png)
 
-20. Wait some time (around 3 minutes) and then go to AWS -> EC2 -> Target groups, select your Target Group and confirm that all three tasks have been registered as "targets" with a "healthy" state
+15. Wait some time (around 3 minutes) and then go to AWS -> EC2 -> Target groups, select your Target Group and confirm that all three tasks have been registered as "targets" with a "healthy" state
 
 ![](images/deploy_16.png)
 
-21.  Go to AWS -> EC2 -> Load Balancers and select your Load Balancer
+16.  Go to AWS -> EC2 -> Load Balancers and select your Load Balancer
 
 ![](images/deploy_14.png)
 
-22. Copy DNS of your Load Balancer
+17. Copy DNS of your Load Balancer
 
 ![](images/deploy_15.png)
 
-23. Execute test request (just adjust URL to DNS of your Load Balancer)
+18. Execute test request (just adjust URL to DNS of your Load Balancer)
 
 Create test measurement
 

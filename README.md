@@ -13,97 +13,94 @@
 - [Manual clean-up](#manual-clean-up)
 
 # Create non-root user
-1. Go to AWS and login to your Sandbox account as root (using e-mail)
+### 1. Go to AWS and login to your Sandbox account as root (using e-mail)
 
 ![](images/init_1.png)
 
-2. Go to AWS -> IAM
-3. Go to Users and click on "Create user"
+### 2. Go to AWS -> IAM
+### 3. Go to Users and click on **Create user**
 
 ![](images/init_2.png)
 
-4. Provide user details and click on "Next"
+### 4. Provide user details and click on **Next**
 
 ![](images/init_3.png)
 
-Enable console access.
-Do not require password reset at the next login.
+*Enable console access.*
+*Do not require password reset at the next login.*
 
-5. Attach user to "Admins" user group and click on "Next"
+### 5. Attach user to **Admins** user group and click on **Next**
 
 ![](images/init_4.png)
 
-You could also attach **AdministrativeAccess** policy directly to the user.
+*You could also attach **AdministrativeAccess** policy directly to the user.*<br>
+***Attention!** Usually, we would like to carefully investigate which policies are actually needed for the user. However, in our case we really want to perform as an administrator, therefore, we are granting the administrative access policy to our user.*
 
-**Attention!** Usually, we would like to carefully investigate which policies are actually needed for the user. However, in our case we really want to perform as an administrator, therefore, we are granting the administrative access policy to our user.
+### 6. Review details and click on **Create user**
 
-6. Review details and click on "Create user"
-
-7. Copy Console-sign-in URL, save it in your browser and go back to the users list
+### 7. Copy Console-sign-in URL, save it in your browser and go back to the users list
    
 ![](images/init_5.png)
 
-8. Select your user from the list and open its details
-9. Open "Security credentials" tab
+### 8. Select your user from the list and open its details
+### 9. Open **Security credentials** tab
 
 ![](images/init_6.png)
 
-10. Scroll down and click on "Create access key"
+### 10. Scroll down and click on **Create access key**
 
 ![](images/init_7.png)
 
-11. Select CLI use case, confirm disclaimer and click on "Next"
+### 11. Select CLI use case, confirm disclaimer and click on **Next**
 
 ![](images/init_8.png)
 
-12. Specify some tag and click on "Create access key"
+### 12. Specify some tag and click on **Create access key**
 
 ![](images/init_9.png)
 
-13. Make sure that you have copied both **Access key** and **Secret access key** and stored securely, as we will later use them in AWS credentials file and in GitHub pipelines
+### 13. Make sure that you have copied both **Access key** and **Secret access key** and stored securely, as we will later use them in AWS credentials file and in GitHub pipelines
 
 ![](images/init_10.png)
 
 # Create VPC
-1. Go to AWS -> VPC -> Create VPC
-2. Select "VPC and more" to use the intuitive creator
+### 1. Go to AWS -> VPC -> Create VPC
+### 2. Select **VPC and more** to use the intuitive creator
 
-IPv4 CIDR block can be set to 10.0.0.0/22. It will provide more than 1000 IP addresses which is more than enough for this lab.
-
-No IPv6 CIDR is needed.
+*IPv4 CIDR block can be set to 10.0.0.0/22. It will provide more than 1000 IP addresses which is more than enough for this lab.*<br>
+*No IPv6 CIDR is needed.*
 
 ![](images/vpc_1.png)
 ![](images/vpc_2.png)
 
-Choose 3 Availability Zones and leave other options as default.
+### 3. Choose 3 Availability Zones and leave other options as default.
 
+*Creator should create:*
+* *Internet gateway*
+* *Three private route tables (one for each private subnet)*
+* *One public route table for all public subnets*
 
-Creator should create:
-* Internet gateway
-* Three private route tables (one for each private subnet)
-* One public route table for all public subnets
+### 4. Check created VPC -> Internet gateways
 
-3. Check created VPC -> Internet gateways
+*It provides access to the Internet.*
 
-It provides access to the Internet.
+### 5. Check VPC -> Route tables -> public route table
 
-4. Check VPC -> Route tables -> public route table
-
-It contains route entry to the Internet gateway which makes all of the three subnets public.
+*It contains route entry to the Internet gateway which makes all of the three subnets public.*
 
 ![](images/vpc_3.png)
 ![](images/vpc_4.png)
 
-5. Check VPC -> Route tables -> private route table
+### 6. Check VPC -> Route tables -> private route table
 
-It contains prefix list with multiple IP addresses assigned to the S3 VPC Endpoint.
+*It contains prefix list with multiple IP addresses assigned to the S3 VPC Endpoint.*
 
 ![](images/vpc_5.png)
 ![](images/vpc_6.png)
 
-6. Check created VPC -> Endpoints
+### 7. Check created VPC -> Endpoints
 
-There should be a S3 VPC Endpoint providing internal access to S3 service from private subnets.
+*There should be a S3 VPC Endpoint providing internal access to S3 service from private subnets.*
 
 # Create static S3 website
 * https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html

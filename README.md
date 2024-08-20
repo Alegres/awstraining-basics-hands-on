@@ -132,16 +132,14 @@ AWS will automatically create a small storage.
 7. Go into "Advanced details" and configure User data
 
 ```bash
-sudo yum install git -y
-sudo wget
-http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo
--O /etc/yum.repos.d/epel-apache-maven.repo
-sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
-sudo yum install maven -y
-sudo yum install docker
-sudo systemctl enable docker.service
-sudo systemctl start docker.service
-sudo chmod 666 /var/run/docker.sock
+sudo yum install git -y && \
+sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo && \
+sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo && \
+sudo yum install maven -y && \
+sudo yum install docker && \
+sudo systemctl enable docker.service && \
+sudo systemctl start docker.service && \
+sudo chmod 666 /var/run/docker.sock && \
 sudo yum install java-17-amazon-corretto-devel
 ```
 

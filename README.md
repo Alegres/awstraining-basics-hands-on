@@ -798,6 +798,8 @@ curl -vk http://myapp-lb-564621670.eu-central-1.elb.amazonaws.com/device/v1/test
 ```
 
 # Certification
+What is important from the perspective of the certification? What helps to achieve it?
+
 * Knowledge
    * Stephane Maarek courses on Udemy
 * Practical experience

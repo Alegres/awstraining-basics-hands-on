@@ -11,6 +11,7 @@
 - [Create ECS Fargate](#create-ecs-fargate)
 - [Deploy our application](#deploy-our-application)
 - [Manual clean-up](#manual-clean-up)
+- [Certification](#certification)
 
 # Create non-root user
 1. Go to AWS and login to your Sandbox account as root (using e-mail)

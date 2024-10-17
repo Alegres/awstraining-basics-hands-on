@@ -109,6 +109,11 @@ There should be a S3 VPC Endpoint providing internal access to S3 service from p
 * https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html
 
 # Create EC2, SNS topic and run notification script
+We will create our development environment (EC2 instance) responsible for:
+- application builds
+- deployments of Docker images to ECR
+- sample notifications to SNS
+
 1. Go to AWS -> EC2
 2. Click on "Launch instance"
 3. Fill name and select Amazon Linux as AMI

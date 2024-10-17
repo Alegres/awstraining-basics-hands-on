@@ -110,6 +110,7 @@ There should be a S3 VPC Endpoint providing internal access to S3 service from p
 
 # Create EC2, SNS topic and run notification script
 We will create our development environment (EC2 instance) responsible for:
+- retrieving application code from GitHub
 - application builds
 - deployments of Docker images to ECR
 - sample notifications to SNS

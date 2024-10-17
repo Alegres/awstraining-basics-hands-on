@@ -796,6 +796,21 @@ Retrieve mesurements
 curl -vk http://myapp-lb-564621670.eu-central-1.elb.amazonaws.com/device/v1/test -u testUser:welt
 ```
 
+# Certification
+* Knowledge
+   * Stephane Maarek courses on Udemy
+* Practical experience
+   * Our training
+   * Exercises in free tier account
+   * Daily work in project
+   * Pluralsight Labs 
+      * https://app.pluralsight.com/
+   * AWS Builder Labs 
+      * https://aws.amazon.com/training/digital/aws-builder-labs/
+* Sample exams
+   * Available on Udemy
+   * Very often real exam questions show up
+
 # Manual clean-up
 Please clean up the following resources (order might be important):
 
